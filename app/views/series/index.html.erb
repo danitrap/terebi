@@ -1,0 +1,13 @@
+<h1>Listing series</h1>
+
+<% @series.in_groups_of(4, false) do |series_group| %>
+  <div class="row series">
+  <% series_group.each do |series| %>
+    <%= render series %>
+  <% end %>
+  </div>
+<% end %>
+
+<br>
+
+<%= link_to 'New Series', new_series_path, class: "btn btn-info" %>

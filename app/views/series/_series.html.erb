@@ -1,0 +1,13 @@
+<div class="col-sm-6 col-md-3">
+  <div class="thumbnail">
+    <%= image_tag series.poster, class: "img-responsive serie-poster", alt: series.name %>
+    <div class="caption">
+      <h3><%= series.name %></h3><br>
+      <p> 
+        <%= link_to 'View', series_episodes_path(series), class: "btn btn-primary" %> 
+        <%= link_to 'Edit', edit_series_path(series), class: "btn btn-default" %> 
+        <%= link_to 'Destroy', series, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %> 
+      </p>
+    </div>
+  </div>
+</div>
