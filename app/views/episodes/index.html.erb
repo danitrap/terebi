@@ -4,24 +4,10 @@
   <li><%= link_to @series.name, series_episodes_path(@series), class: "active" %></li>
 </ol>
 <%= image_tag @series.banner, class: "img-responsive center-block" %><br>
-
-<% @episodes.each do |episode| %>
-  <div class="media">
-    <%= link_to(play_series_episode_path(@series, episode), class: "pull-left") do %>
-      <%= image_tag episode.thumb, class: "media-object episode-thumb", alt: episode.name %>
-    <% end %>
-    <div class="media-body">
-      <h2 class="media-heading">
-        <%= episode_meta(episode) %> <%= episode.name %> 
-      </h2>
-      <%= content_tag :span, time_ago_in_words(episode.air_date) + " ago", title: episode.air_date %>
-      <p><%= episode.overview %></p>
-      <%= link_to 'Play', play_series_episode_path(@series, episode), class: "btn btn-primary" %>
-      <%= link_to 'Edit', edit_series_episode_path(@series, episode), class: "btn btn-default" %>
-      <%= link_to 'Destroy', series_episode_path(@series, episode), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
-    </div>
-  </div>
-<% end %>
+<h2>New episodes</h2>
+<%= render partial: 'episode_item', collection: @new_episodes, as: :episode %>
+<h2>Seen episodes</h2>
+<%= render partial: 'episode_item', collection: @seen_episodes, as: :episode %>
 
 <br>
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131217162710) do
+ActiveRecord::Schema.define(version: 20131217163219) do
 
   create_table "episodes", force: true do |t|
     t.string   "name"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20131217162710) do
     t.text     "thumb"
     t.date     "air_date"
     t.integer  "season"
+    t.boolean  "seen",       default: false
   end
 
   add_index "episodes", ["name", "season", "episode", "updated_at"], name: "index_episodes_on_name_and_season_and_episode_and_updated_at"

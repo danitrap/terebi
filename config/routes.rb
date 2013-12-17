@@ -3,6 +3,7 @@ Terebi::Application.routes.draw do
     resources :episodes do
       member do
         get "play"
+        patch 'unsee'
       end
     end
   end

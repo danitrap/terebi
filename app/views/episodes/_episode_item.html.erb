@@ -1,0 +1,18 @@
+<div class="media">
+  <%= link_to(play_series_episode_path(@series, episode), class: "pull-left") do %>
+    <%= image_tag episode.thumb, class: "media-object episode-thumb", alt: episode.name %>
+  <% end %>
+  <div class="media-body">
+    <h2 class="media-heading">
+      <%= episode_meta(episode) %> <%= episode.name %> 
+    </h2>
+    <%= content_tag :span, time_ago_in_words(episode.air_date) + " ago", title: episode.air_date %>
+    <p><%= episode.overview %></p>
+    <%= link_to 'Play', play_series_episode_path(@series, episode), class: "btn btn-primary" %>
+    <%= link_to 'Edit', edit_series_episode_path(@series, episode), class: "btn btn-default" %>
+    <% if episode.seen == true %>
+      <%= link_to 'Mark as not seen', unsee_series_episode_path(@series, episode), class: "btn btn-default", method: :patch %>
+    <% end %>
+    <%= link_to 'Destroy', series_episode_path(@series, episode), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+  </div>
+</div>

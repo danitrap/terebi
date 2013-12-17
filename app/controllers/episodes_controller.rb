@@ -1,11 +1,12 @@
 class EpisodesController < ApplicationController
-  before_action :set_episode, only: [:show, :edit, :update, :destroy, :play]
+  before_action :set_episode, only: [:show, :edit, :update, :destroy, :play, :unsee]
 
   # GET /episodes
   # GET /episodes.json
   def index
     @series = Series.find(params[:series_id])
-    @episodes = @series.episodes.order("season desc, episode desc")
+    @new_episodes = @series.episodes.where(:seen => false).order("season desc, episode desc")
+    @seen_episodes = @series.episodes.where(:seen => true).order("season desc, episode desc")
   end
 
   # GET /episodes/1
@@ -15,9 +16,15 @@ class EpisodesController < ApplicationController
 
   # PUT /episodes/1/play
   def play
+    @episode.update_attribute(:seen, true)
     Suby.download_subtitles [@episode.path], lang: "it"
     system "bash", "mpc.sh", "\"#{@episode.path}\""
     redirect_to series_episodes_path(@series)
+  end
+
+  def unsee
+    @episode.update_attribute(:seen, false)
+    redirect_to :back
   end
 
   # GET /episodes/new
