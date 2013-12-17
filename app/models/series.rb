@@ -11,7 +11,8 @@ class Series < ActiveRecord::Base
     results = @tvdb.search(name).first rescue nil
     result = @tvdb.get_series_by_id(results["seriesid"]) rescue nil
     if result.nil? 
-      result = TvdbSeriesMocker.new("Unknown", "Unknown series." )
+      result = TvdbSeriesMocker.new("Unknown", "Unknown series.", "http://placehold.it/350x50",
+               "http://placehold.it/227x335", "none")
     end
 
     saved = Series.where(:name => result.name).first_or_create.tap do |serie|

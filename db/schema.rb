@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131217025743) do
+ActiveRecord::Schema.define(version: 20131217162710) do
 
   create_table "episodes", force: true do |t|
     t.string   "name"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20131217025743) do
   end
 
   add_index "episodes", ["name", "season", "episode", "updated_at"], name: "index_episodes_on_name_and_season_and_episode_and_updated_at"
+  add_index "episodes", ["path"], name: "index_episodes_on_path"
 
   create_table "series", force: true do |t|
     t.string   "name"

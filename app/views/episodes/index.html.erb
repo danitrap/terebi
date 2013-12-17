@@ -1,3 +1,8 @@
+<ol class="breadcrumb">
+  <li><a href="/">Home</a></li>
+  <li><a href="/series">Series</a></li>
+  <li><%= link_to @series.name, series_episodes_path(@series), class: "active" %></li>
+</ol>
 <%= image_tag @series.banner, class: "img-responsive center-block" %><br>
 
 <% @episodes.each do |episode| %>

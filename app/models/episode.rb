@@ -8,9 +8,11 @@ class Episode < ActiveRecord::Base
   @tvdb ||= TvdbParty::Search.new("C62F24B5D73BAFE2", "it")
 
   def self.add(video_path)
+
     video_dir = Pathname.new(video_path)
     video = video_dir.directory? ? video_dir.children.select {|v| File.extname(v) == ".mkv" || File.extname(v) == ".mp4"}.first : video_dir.to_s
     return nil if video.include?("sample")
+    return nil if Episode.exists? path: video
     file = FileMocker.new(File.basename(video))
     episodio = Suby::FilenameParser.parse(file)
     p episodio

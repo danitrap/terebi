@@ -1,4 +1,7 @@
-<h1>Listing series</h1>
+<ol class="breadcrumb">
+  <li><a href="/">Home</a></li>
+  <li><a href="/series" class="active">Series</a></li>
+</ol>
 
 <% @series.in_groups_of(4, false) do |series_group| %>
   <div class="row series">

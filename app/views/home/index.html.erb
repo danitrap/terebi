@@ -1,5 +1,6 @@
-<h1>Terebi</h1>
-
+<ol class="breadcrumb">
+  <li><a href="/" class="active">Home</a></li>
+</ol>
 <h2>Latest episodes</h2>
 <% @latest_episodes.each do |episode| %>
     <%= link_to "#{episode.series.name} - #{episode.name}", series_episodes_path(episode.series) %><br>
