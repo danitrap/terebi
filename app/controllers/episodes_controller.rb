@@ -5,7 +5,7 @@ class EpisodesController < ApplicationController
   # GET /episodes.json
   def index
     @series = Series.find(params[:series_id])
-    @episodes = @series.episodes
+    @episodes = @series.episodes.order("season desc, episode desc")
   end
 
   # GET /episodes/1

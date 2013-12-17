@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131217013108) do
+ActiveRecord::Schema.define(version: 20131217025743) do
 
   create_table "episodes", force: true do |t|
     t.string   "name"
@@ -26,6 +26,8 @@ ActiveRecord::Schema.define(version: 20131217013108) do
     t.integer  "season"
   end
 
+  add_index "episodes", ["name", "season", "episode", "updated_at"], name: "index_episodes_on_name_and_season_and_episode_and_updated_at"
+
   create_table "series", force: true do |t|
     t.string   "name"
     t.string   "poster"
@@ -35,5 +37,7 @@ ActiveRecord::Schema.define(version: 20131217013108) do
     t.string   "banner"
     t.text     "overview"
   end
+
+  add_index "series", ["name", "updated_at"], name: "index_series_on_name_and_updated_at"
 
 end

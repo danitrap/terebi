@@ -12,7 +12,6 @@
       <small><em><%= episode.air_date %></em></small>
       <p><%= episode.overview %></p>
       <%= link_to 'Play', play_series_episode_path(@series, episode), class: "btn btn-primary" %>
-      <%= link_to 'Show', series_episode_path(@series, episode), class: "btn btn-default" %>
       <%= link_to 'Edit', edit_series_episode_path(@series, episode), class: "btn btn-default" %>
       <%= link_to 'Destroy', series_episode_path(@series, episode), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
     </div>

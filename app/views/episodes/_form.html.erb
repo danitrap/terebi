@@ -16,12 +16,28 @@
     <%= f.text_field :name, class: "form-control" %>
   </div>
   <div class="field">
-    <%= f.label :number %><br>
-    <%= f.number_field :number, class: "form-control" %>
+    <%= f.label :season %><br>
+    <%= f.number_field :season, class: "form-control" %>
+  </div>
+  <div class="field">
+    <%= f.label :episode %><br>
+    <%= f.number_field :episode, class: "form-control" %>
+  </div>
+  <div class="field">
+    <%= f.label :thumb %><br>
+    <%= f.text_field :thumb, class: "form-control" %>
+  </div>
+  <div class="field">
+    <%= f.label :overview %><br>
+    <%= f.text_area :overview, class: "form-control" %>
   </div>
   <div class="field">
     <%= f.label :path %><br>
     <%= f.text_area :path, class: "form-control" %>
+  </div>
+  <div class="field">
+    <%= f.label :air_date %><br>
+    <%= f.date_field :air_date, class: "form-control" %>
   </div>
   <div class="actions">
     <%= f.submit class: "btn btn-primary" %>
