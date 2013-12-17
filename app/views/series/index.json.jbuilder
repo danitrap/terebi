@@ -1,4 +1,4 @@
-json.array!(@series) do |show|
-  json.extract! series, :id, :name, :poster
-  json.url show_url(series, format: :json)
+json.array!(@series) do |series|
+  json.extract! series, :id, :name, :overview, :poster, :imdb_id
+  json.url series_episodes_url(series, format: :json)
 end
