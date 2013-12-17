@@ -1,16 +1,23 @@
 class EpisodesController < ApplicationController
-  before_action :set_episode, only: [:show, :edit, :update, :destroy]
+  before_action :set_episode, only: [:show, :edit, :update, :destroy, :play]
 
   # GET /episodes
   # GET /episodes.json
   def index
     @series = Series.find(params[:series_id])
-    @episodes = @series.episodes.all
+    @episodes = @series.episodes
   end
 
   # GET /episodes/1
   # GET /episodes/1.json
   def show
+  end
+
+  # PUT /episodes/1/play
+  def play
+    Suby.download_subtitles [@episode.path], lang: "it"
+    system "bash", "mpc.sh", "\"#{@episode.path}\""
+    redirect_to series_episodes_path(@series)
   end
 
   # GET /episodes/new
@@ -73,6 +80,6 @@ class EpisodesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def episode_params
-      params.require(:episode).permit(:name, :number, :path, :series_id)
+      params.require(:episode).permit(:name, :episode, :path, :overview, :thumb)
     end
 end

@@ -1,6 +1,10 @@
 Terebi::Application.routes.draw do
   resources :series do
-    resources :episodes
+    resources :episodes do
+      member do
+        get "play"
+      end
+    end
   end
 
   root "home#index"

@@ -13,13 +13,25 @@
 
   <div class="field">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, class: "form-control" %>
   </div>
   <div class="field">
     <%= f.label :poster %><br>
-    <%= f.text_field :poster %>
+    <%= f.text_field :poster, class: "form-control" %>
+  </div>
+  <div class="field">
+    <%= f.label :banner %><br>
+    <%= f.text_field :banner, class: "form-control" %>
+  </div>
+  <div class="field">
+    <%= f.label :imdb_id %><br>
+    <%= f.text_field :imdb_id, class: "form-control" %>
+  </div>
+  <div class="field">
+    <%= f.label :overview %><br>
+    <%= f.text_area :overview, class: "form-control" %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: "btn btn-primary" %>
   </div>
 <% end %>

@@ -1,29 +1,24 @@
-<h1><%= @series.name %></h1>
+<%= image_tag @series.banner, class: "img-responsive center-block" %><br>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Number</th>
-      <th>Name</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @episodes.each do |episode| %>
-      <tr>
-        <td><%= episode.number %></td>
-        <td><%= episode.name %></td>
-        <td><%= link_to 'Show', series_episode_path(@series, episode) %></td>
-        <td><%= link_to 'Edit', edit_series_episode_path(@series, episode) %></td>
-        <td><%= link_to 'Destroy', series_episode_path(@series, episode), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+<% @episodes.each do |episode| %>
+  <div class="media">
+    <%= link_to(play_series_episode_path(@series, episode), class: "pull-left") do %>
+      <%= image_tag episode.thumb, class: "media-object episode-thumb", alt: episode.name %>
     <% end %>
-  </tbody>
-</table>
+    <div class="media-body">
+      <h2 class="media-heading">
+        <%= episode_meta(episode) %> <%= episode.name %> 
+      </h2>
+      <small><em><%= episode.air_date %></em></small>
+      <p><%= episode.overview %></p>
+      <%= link_to 'Play', play_series_episode_path(@series, episode), class: "btn btn-primary" %>
+      <%= link_to 'Show', series_episode_path(@series, episode), class: "btn btn-default" %>
+      <%= link_to 'Edit', edit_series_episode_path(@series, episode), class: "btn btn-default" %>
+      <%= link_to 'Destroy', series_episode_path(@series, episode), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+    </div>
+  </div>
+<% end %>
 
 <br>
 
-<%= link_to 'New Episode', new_series_episode_path(@series, @show) %>
+<%= link_to 'New Episode', new_series_episode_path(@series, @show), class: "btn btn-info" %>
