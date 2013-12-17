@@ -26,7 +26,6 @@ namespace :terebi do
   task seed_episodes: :environment do
     directories = Pathname.new("F:\\TV Shows\\").children.select { |f| f.directory? }
     tvdb = TvdbParty::Search.new("C62F24B5D73BAFE2", "it")
-    FileMocker = Struct.new(:basename)
 
     directories.each do |show|
       name = File.basename(show)
@@ -38,27 +37,7 @@ namespace :terebi do
       episodes = show.children.select { |f| f.directory? }
 
       episodes.each do |episode|
-        video_fp = episode.children.select { |v| File.extname(v) == ".mkv" }.first
-        video = File.basename(video_fp)
-        file = FileMocker.new(File.basename(video))
-        episodio = Suby::FilenameParser.parse(file)
-
-        next if episodio[:type] == :unknown
-
-        tvdb_ep = result.get_episode(episodio[:season], episodio[:episode])
-        puts "#{name} S#{episodio[:season]}E#{episodio[:episode]}"
-
-        saved = series.episodes.where(:name => tvdb_ep.name).first_or_create.tap do |e|
-          e.overview = tvdb_ep.overview
-          e.thumb = tvdb_ep.thumb
-          e.air_date = tvdb_ep.air_date
-          e.episode = tvdb_ep.number.to_i
-          e.season = tvdb_ep.season_number.to_i
-          e.path = video_fp.to_s
-          e.save!
-        end
-        p saved
-        sleep 1
+        Episode.add(episode)
       end
     sleep 1
     end
@@ -66,34 +45,6 @@ namespace :terebi do
 
   desc "add episode"
   task :add_episode, [:video] => [:environment] do |t, args|
-    tvdb = TvdbParty::Search.new("C62F24B5D73BAFE2", "it")
-    FileMocker = Struct.new(:basename)
-    video_dir = args[:video]
-    video = Pathname.new(video_dir).children.select {|v| File.extname(v) == ".mkv" || File.extname(v) == ".mp4"}.first
-    file = FileMocker.new(File.basename(video))
-    episodio = Suby::FilenameParser.parse(file)
-    p episodio
-    results = tvdb.search(episodio[:show]).first rescue nil
-    result = results && tvdb.get_series_by_id(results["seriesid"]) rescue nil
-    tvdb_ep = result && result.get_episode(episodio[:season], episodio[:episode]) rescue nil
-    if tvdb_ep.nil?
-      TvdbMock = Struct.new(:name, :overview, :thumb, :air_date)
-      tvdb_ep = TvdbMock.new(episodio[:name], "No overview.", "http://placehold.it/350x250", Time.now)
-    end
-    series_name = episodio[:show] || "Unknown"
-    series = Series.where("name LIKE ?", "%#{series_name}%").take
-    if series
-      saved = series.episodes.where(:name => tvdb_ep.name).first_or_create.tap do |e|
-        e.overview = tvdb_ep.overview
-        e.thumb = tvdb_ep.thumb
-        e.air_date = tvdb_ep.air_date
-        e.episode = episodio[:episode] || 0
-        e.season = episodio[:season] || 0
-        e.path = video.to_s
-        e.save!
-      end
-      p saved
-    end
-
+    Episode.add(args[:video])
   end
 end  

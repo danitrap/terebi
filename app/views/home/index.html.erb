@@ -1,2 +1,6 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<h1>Terebi</h1>
+
+<h2>Latest episodes</h2>
+<% @latest_episodes.each do |episode| %>
+    <%= link_to "#{episode.series.name} - #{episode.name}", series_episodes_path(episode.series) %><br>
+<% end %>
