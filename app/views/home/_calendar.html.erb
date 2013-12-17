@@ -1,0 +1,14 @@
+<table class="table">
+    <thead>
+        <th></th>
+        <th></th>
+    </thead>
+    <tbody>
+        <% @calendar.each do |cal| %>
+            <tr>
+                <td><%= cal.time %></td>
+                <td><%= cal.name %> (<%= cal.title %>)</td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>

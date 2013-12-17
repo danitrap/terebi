@@ -1,0 +1,14 @@
+<table class="table table-condensed">
+    <thead>
+        <th></th>
+        <th></th>
+    </thead>
+    <tbody>
+        <% episodes.each do |episode| %>
+            <tr>
+                <td><%= link_to "#{episode.series.name}", series_episodes_path(episode.series) %></td>
+                <td><%= link_to "#{episode.meta} #{episode.name}", play_series_episode_path(episode.series, episode) %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>

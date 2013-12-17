@@ -1,0 +1,25 @@
+<% if @unseen_episodes %>
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner">
+        <% @unseen_episodes.each_with_index do |c_episode, i| %>
+            <div class="item <%= "active" if i == 0 %>">
+                <%= image_tag(c_episode.series.banner, alt: c_episode.name, class: "carousel-image") %>
+                <div class="carousel-caption">
+                    <h1><%= c_episode.name %></h1>
+                    <p><%= c_episode.overview.truncate(100) %></p><br>
+                    <%= link_to "Watch", play_series_episode_path(c_episode.series, c_episode), class: "btn btn-success btn-lg" %>
+                </div>
+            </div>
+        <% end %>
+      </div>
+
+      <!-- Controls -->
+      <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+      </a>
+      <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+      </a>
+    </div>
+<% end %>

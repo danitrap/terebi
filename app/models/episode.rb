@@ -7,6 +7,12 @@ class Episode < ActiveRecord::Base
 
   @tvdb ||= TvdbParty::Search.new("C62F24B5D73BAFE2", "it")
 
+  def meta
+    season = "%02d" % self.season
+    ep = "%02d" % self.episode
+    "S#{season}E#{ep}"
+  end
+
   def self.add(video_path)
 
     video_dir = Pathname.new(video_path)

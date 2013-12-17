@@ -4,7 +4,7 @@
   <% end %>
   <div class="media-body">
     <h2 class="media-heading">
-      <%= episode_meta(episode) %> <%= episode.name %> 
+      <%= episode.meta %> <%= episode.name %> 
     </h2>
     <%= content_tag :span, time_ago_in_words(episode.air_date) + " ago", title: episode.air_date %>
     <p><%= episode.overview %></p>
