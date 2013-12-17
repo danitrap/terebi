@@ -23,22 +23,13 @@ namespace :terebi do
   end
 
   desc "seed episodes"
-  task seed_episodes: :environment do
-    directories = Pathname.new("F:\\TV Shows\\").children.select { |f| f.directory? }
-    tvdb = TvdbParty::Search.new("C62F24B5D73BAFE2", "it")
+  task :seed_episodes, [:path] => [:environment] do |t, args|
+    videos = Dir["#{args[:path]}/**/*.mkv"].to_a | Dir["#{args[:path]}/**/*.mp4"].to_a
 
-    directories.each do |show|
-      name = File.basename(show)
+    videos.each do |episode|
+      name = File.basename(episode)
       puts "lavorando con #{name}"
-      results = tvdb.search(name).select {|s| s["language"] == "en"}.first rescue next
-      result = tvdb.get_series_by_id(results["seriesid"]) rescue next
-
-      series = Series.where(:name => name).take
-      episodes = show.children.select { |f| f.directory? }
-
-      episodes.each do |episode|
-        Episode.add(episode)
-      end
+      Episode.add(episode)
     sleep 1
     end
   end
