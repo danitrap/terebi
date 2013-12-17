@@ -6,8 +6,7 @@
       <p><em><%= series.overview && series.overview.truncate(100) %></em></p>
       <p> 
         <%= link_to 'IMDb', "http://www.imdb.com/title/#{series.imdb_id}/", target: "_blank", class: "btn btn-default" %> 
-        <%= link_to 'Edit', edit_series_path(series), class: "btn btn-default" %> 
-        <%= link_to 'Destroy', series, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %> 
+        <%= link_to 'Episode list', "http://en.wikipedia.org/wiki/List_of_#{series.name.gsub(" ", "_")}_episodes", target: "_blank", class: "btn btn-default" %>
       </p>
     </div>
   </div>
