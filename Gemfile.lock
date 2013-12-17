@@ -147,6 +147,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   jbuilder (~> 1.2)
   jquery-rails
+  nokogiri
   rails (= 4.0.2)
   rspec-rails
   sass-rails (~> 4.0.0)

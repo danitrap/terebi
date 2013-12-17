@@ -1,4 +1,4 @@
-<div class="media">
+<div class="media <%= "seen" if episode.seen %>">
   <%= link_to(play_series_episode_path(@series, episode), class: "pull-left") do %>
     <%= image_tag episode.thumb, class: "media-object episode-thumb", alt: episode.name %>
   <% end %>
@@ -11,7 +11,7 @@
     <%= link_to 'Play', play_series_episode_path(@series, episode), class: "btn btn-primary" %>
     <%= link_to 'Edit', edit_series_episode_path(@series, episode), class: "btn btn-default" %>
     <% if episode.seen == true %>
-      <%= link_to 'Mark as not seen', unsee_series_episode_path(@series, episode), class: "btn btn-default", method: :patch %>
+      <%= link_to 'Mark as unwatched', unsee_series_episode_path(@series, episode), class: "btn btn-default", method: :patch %>
     <% end %>
     <%= link_to 'Destroy', series_episode_path(@series, episode), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
   </div>

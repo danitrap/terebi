@@ -1,7 +1,61 @@
-<ol class="breadcrumb">
-  <li><a href="/" class="active">Home</a></li>
-</ol>
-<h2>Latest episodes</h2>
-<% @latest_episodes.each do |episode| %>
-    <%= link_to "#{episode.series.name} - #{episode.name}", series_episodes_path(episode.series) %><br>
-<% end %>
+<% if @unseen_episodes %>
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner">
+        <% @unseen_episodes.each_with_index do |c_episode, i| %>
+            <div class="item <%= "active" if i == 0 %>">
+                <%= image_tag(c_episode.series.banner, alt: c_episode.name, class: "carousel-image") %>
+                <div class="carousel-caption">
+                    <h1><%= c_episode.name %></h1>
+                    <p><%= c_episode.overview.truncate(100) %></p><br>
+                    <%= link_to "Watch", play_series_episode_path(c_episode.series, c_episode), class: "btn btn-success btn-lg" %>
+                </div>
+            </div>
+        <% end %>
+      </div>
+
+      <!-- Controls -->
+      <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+      </a>
+      <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+      </a>
+    </div>
+ <% end %>
+
+<div class="row">
+    <div class="col-md-4">
+        <h3>Unwatched episodes <span class="badge"><%= @unseen_episodes.count %></span></h3>
+        <div class="unseen">
+            <% @unseen_episodes.each do |episode| %>
+                <%= link_to "#{episode.series.name} - #{episode.name}", series_episodes_path(episode.series) %><br>
+            <% end %>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <h3>Watched episodes <span class="badge"><%= @seen_count %></span></h3>
+        <div class="seen">
+            <% @seen_episodes.each do |episode| %>
+                <%= link_to "#{episode.series.name} - #{episode.name}", series_episodes_path(episode.series) %><br>
+            <% end %>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <h3>Today's calendar</h3>
+        <table class="table">
+            <thead>
+                <th></th>
+                <th></th>
+            </thead>
+            <tbody>
+                <% @calendar.each do |cal| %>
+                    <tr>
+                        <td><%= cal.time %></td>
+                        <td><%= cal.name %> (<%= cal.title %>)</td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>
