@@ -72,19 +72,23 @@ namespace :terebi do
     video = Pathname.new(video_dir).children.select {|v| File.extname(v) == ".mkv" || File.extname(v) == ".mp4"}.first
     file = FileMocker.new(File.basename(video))
     episodio = Suby::FilenameParser.parse(file)
-    next if episodio[:type] == :unknown
     p episodio
-    results = tvdb.search(episodio[:show]).first rescue next
-    result = tvdb.get_series_by_id(results["seriesid"]) rescue next
-    tvdb_ep = result.get_episode(episodio[:season], episodio[:episode])
-    series = Series.where("name LIKE ?", "%#{episodio[:show]}%").take
+    results = tvdb.search(episodio[:show]).first rescue nil
+    result = results && tvdb.get_series_by_id(results["seriesid"]) rescue nil
+    tvdb_ep = result && result.get_episode(episodio[:season], episodio[:episode]) rescue nil
+    if tvdb_ep.nil?
+      TvdbMock = Struct.new(:name, :overview, :thumb, :air_date)
+      tvdb_ep = TvdbMock.new(episodio[:name], "No overview.", "http://placehold.it/350x250", Time.now)
+    end
+    series_name = episodio[:show] || "Unknown"
+    series = Series.where("name LIKE ?", "%#{series_name}%").take
     if series
       saved = series.episodes.where(:name => tvdb_ep.name).first_or_create.tap do |e|
         e.overview = tvdb_ep.overview
         e.thumb = tvdb_ep.thumb
         e.air_date = tvdb_ep.air_date
-        e.episode = tvdb_ep.number.to_i
-        e.season = tvdb_ep.season_number.to_i
+        e.episode = episodio[:episode] || 0
+        e.season = episodio[:season] || 0
         e.path = video.to_s
         e.save!
       end

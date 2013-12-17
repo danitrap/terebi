@@ -9,7 +9,7 @@
       <h2 class="media-heading">
         <%= episode_meta(episode) %> <%= episode.name %> 
       </h2>
-      <small><em><%= episode.air_date %></em></small>
+      <%= content_tag :span, time_ago_in_words(episode.air_date) + " ago", title: episode.air_date %>
       <p><%= episode.overview %></p>
       <%= link_to 'Play', play_series_episode_path(@series, episode), class: "btn btn-primary" %>
       <%= link_to 'Edit', edit_series_episode_path(@series, episode), class: "btn btn-default" %>
