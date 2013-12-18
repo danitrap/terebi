@@ -6,9 +6,9 @@ namespace :terebi do
 
     videos.each do |episode|
       name = File.basename(episode)
-      puts "checking #{name}"
       Episode.add(episode)
     end
+    puts "done :)"
   end
 
   desc "add episode"

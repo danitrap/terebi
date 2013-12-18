@@ -1,8 +1,8 @@
 <%= render 'carousel' %>
-
+<% if @seen_count - @unseen_count != 0 %>
 <div class="row">
     <div class="col-md-4">
-        <h3>Unwatched episodes <span class="badge"><%= @unseen_episodes.count %></span></h3>
+        <h3>Unwatched episodes <span class="badge"><%= @unseen_count %></span></h3>
         <div class="unseen">
             <%= render partial: 'episode_table', object: @unseen_episodes, as: :episodes %>
         </div>
@@ -18,3 +18,9 @@
         <%= render 'calendar' %>
     </div>
 </div>
+<% else %>
+<h1>Welcome to terebi.</h1>
+<h3>Make sure to edit this file with your settings: <span class="label label-default">config/settings.yaml</span></h3>
+<h3>Run <span class="label label-default">rake terebi:update</span></h3>
+<h3>Enojoy :)</h3>
+<% end %>
