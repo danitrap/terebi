@@ -18,7 +18,7 @@ class EpisodesController < ApplicationController
   def play
     @episode.update_attribute(:seen, true)
     Suby.download_subtitles [@episode.path], lang: (params[:lang] || Settings.get(:subs_locale))
-    system "bash", "mpc.sh", "\"#{@episode.path}\""
+    system "bash", Settings.get(:player), "\"#{@episode.path}\""
     redirect_to series_episodes_path(@series)
   end
 
