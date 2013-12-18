@@ -14,11 +14,10 @@ class Episode < ActiveRecord::Base
   end
 
   def self.add(video_path)
-
-    video_dir = Pathname.new(video_path)
+    video_dir = Pathname.new(video_path.gsub("\\", "/"))
     video = video_dir.directory? ? video_dir.children.select {|v| File.extname(v) == ".mkv" || File.extname(v) == ".mp4"}.first : video_dir.to_s
-    return nil if video.include?("sample")
-    return nil if Episode.exists? path: video
+    return nil if video.to_s.include?("sample")
+    return nil if Episode.exists? path: video.to_s
     file = FileMocker.new(File.basename(video))
     episodio = Suby::FilenameParser.parse(file)
     p episodio
