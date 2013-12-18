@@ -7,23 +7,27 @@ class Series < ActiveRecord::Base
   @tvdb ||= TvdbParty::Search.new("C62F24B5D73BAFE2", Settings.get(:subs_locale))
 
   def self.add(show)
-    name = File.basename(show)
-    results = @tvdb.search(name).first rescue nil
-    result = @tvdb.get_series_by_id(results["seriesid"]) rescue nil
-    if result.nil? 
-      result = TvdbSeriesMocker.new("Unknown", "Unknown series.", "http://placehold.it/350x50",
-               "http://placehold.it/227x335", "none")
-    end
+    @series_name = File.basename(show)
+    get_series_metadata
 
-    saved = Series.where(:name => result.name).first_or_create.tap do |serie|
-      serie.name = name
-      serie.overview = result.overview
-      serie.banner = result.series_banners('en').first.url
-      serie.poster = result.posters('en').first.url
-      serie.imdb_id = result.imdb_id
+    Series.where(:name => @series_metadata.name).first_or_create.tap do |serie|
+      serie.name = @series_metadata.name
+      serie.overview = @series_metadata.overview
+      serie.banner = @series_metadata.series_banners('en').first.url
+      serie.poster = @series_metadata.posters('en').first.url
+      serie.imdb_id = @series_metadata.imdb_id
       serie.save!
     end
-    p saved
-    return saved
   end
+
+  private
+
+    def get_series_metadata
+      results = @tvdb.search(@series_name).first rescue nil
+      @series_metadata = @tvdb.get_series_by_id(results["seriesid"]) rescue nil
+      if series_metadata.nil? 
+        @series_metadata = TvdbSeriesMocker.new("Unknown", "Unknown series.", "http://placehold.it/350x50",
+               "http://placehold.it/227x335", "none")
+      end
+    end
 end
