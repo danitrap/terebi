@@ -5,7 +5,7 @@
     </thead>
     <tbody>
         <% episodes.each do |episode| %>
-            <tr style="<%= "background:cornsilk;" if SubtitlesChecker.found.include? episode %>">
+            <tr style="<%= "background:cornsilk;" if episode.subtitles_present %>">
                 <td><%= link_to "#{episode.series.name}", series_episodes_path(episode.series) %></td>
                 <td><%= link_to "#{episode.meta} #{episode.name}", play_series_episode_path(episode.series, episode) %></td>
             </tr>

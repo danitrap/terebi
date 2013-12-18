@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131218171955) do
+ActiveRecord::Schema.define(version: 20131218224658) do
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
@@ -40,7 +40,8 @@ ActiveRecord::Schema.define(version: 20131218171955) do
     t.text     "thumb"
     t.date     "air_date"
     t.integer  "season"
-    t.boolean  "seen",       default: false
+    t.boolean  "seen",              default: false
+    t.boolean  "subtitles_present", default: false
   end
 
   add_index "episodes", ["name", "season", "episode", "updated_at"], name: "index_episodes_on_name_and_season_and_episode_and_updated_at"
