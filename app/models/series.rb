@@ -20,14 +20,12 @@ class Series < ActiveRecord::Base
     end
   end
 
-  private
-
-    def get_series_metadata
-      results = @tvdb.search(@series_name).first rescue nil
-      @series_metadata = @tvdb.get_series_by_id(results["seriesid"]) rescue nil
-      if series_metadata.nil? 
-        @series_metadata = TvdbSeriesMocker.new("Unknown", "Unknown series.", "http://placehold.it/350x50",
-               "http://placehold.it/227x335", "none")
-      end
+  def self.get_series_metadata
+    results = @tvdb.search(@series_name).first rescue nil
+    @series_metadata = @tvdb.get_series_by_id(results["seriesid"]) rescue nil
+    if @series_metadata.nil? 
+      @series_metadata = TvdbSeriesMocker.new("Unknown", "Unknown series.", "http://placehold.it/350x50",
+             "http://placehold.it/680x1000", "none")
     end
+  end
 end
