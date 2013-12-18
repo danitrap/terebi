@@ -18,7 +18,7 @@ class Episode < ActiveRecord::Base
     video = video_dir.directory? ? video_dir.children.select {|v| File.extname(v) == ".mkv" || File.extname(v) == ".mp4"}.first : video_dir.to_s
     return nil if video.to_s.include?("sample")
     return nil if Episode.exists? path: video.to_s
-    file = FileMocker.new(File.basename(video))
+    file = Path.new(video)
     episodio = Suby::FilenameParser.parse(file)
     results = @tvdb.search(episodio[:show]).first rescue nil
     series_metadata = results && @tvdb.get_series_by_id(results["seriesid"]) rescue nil
@@ -45,8 +45,9 @@ class Episode < ActiveRecord::Base
     videos = Dir["#{media_path}/**/*.mkv"].to_a | Dir["#{media_path}/**/*.mp4"].to_a
 
     videos.each do |episode|
-      name = File.basename(episode)
       Episode.add(episode)
     end
+
+    SubtitlesChecker.check!
   end
 end
