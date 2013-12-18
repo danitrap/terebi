@@ -1,8 +1,7 @@
 require 'open-uri'
 
 class Calendar
-  FEEDS = {us: "http://services.tvrage.com/feeds/fullschedule.php?country=US", 
-           uk: "http://services.tvrage.com/feeds/fullschedule.php?country=UK"}
+  FEED = "http://services.tvrage.com/feeds/fullschedule.php?country=US"
   @today = []
 
   def self.today
@@ -12,21 +11,20 @@ class Calendar
   private
 
   def self.process_feeds
-    get_feeds
-    parse_feeds
+    get_feed
+    parse_feed
   end
 
-  def self.get_feeds
-    @today_us ||= Nokogiri::XML(open(FEEDS[:us]))
-    @today_uk ||= Nokogiri::XML(open(FEEDS[:uk]))
+  def self.get_feed
+    @today_us ||= Nokogiri::XML(open(FEED))
   end
 
-  def self.parse_feeds
-    us_schedule = @today_us.css("schedule DAY[attr=\"#{Date.today.to_s}\"] time")
-    uk_schedule = @today_uk.css("schedule DAY[attr=\"#{Date.today.to_s}\"] time")
+  def self.parse_feed
+    Time.zone = 'Eastern Time (US & Canada)'
+    date = Time.zone.now.strftime("%Y-%m-%d")
+    us_schedule = @today_us.css("schedule DAY[attr=\"#{date}\"] time")
 
     @today << create_shows(us_schedule)
-    @today << create_shows(uk_schedule)
     @today.flatten!
   end
 
