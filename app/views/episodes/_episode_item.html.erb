@@ -8,7 +8,10 @@
     </h2>
     <%= content_tag :span, time_ago_in_words(episode.air_date) + " ago", title: episode.air_date %>
     <p><%= episode.overview %></p>
-    <%= link_to 'Play', play_series_episode_path(episode.series, episode), class: "btn btn-primary" %>
+    <%= link_to "Play (#{Settings.get(:subs_locale).to_s})", play_series_episode_path(episode.series, episode), class: "btn btn-primary" %>
+    <% if Settings.get(:subs_locale).to_s != "en" %>
+      <%= link_to "Play (en)", play_series_episode_path(episode.series, episode, lang: "en"), class: "btn btn-default" %>
+    <% end %>
     <%= link_to 'Edit', edit_series_episode_path(episode.series, episode), class: "btn btn-default" %>
     <% if episode.seen == true %>
       <%= link_to 'Mark as unwatched', unsee_series_episode_path(episode.series, episode), class: "btn btn-default", method: :patch %>

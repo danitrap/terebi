@@ -4,7 +4,7 @@ class Series < ActiveRecord::Base
 
   validates :name, presence: true, uniqueness: true
 
-  @tvdb ||= TvdbParty::Search.new("C62F24B5D73BAFE2", "it")
+  @tvdb ||= TvdbParty::Search.new("C62F24B5D73BAFE2", Settings.get(:subs_locale))
 
   def self.add(show)
     name = File.basename(show)
