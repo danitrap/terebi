@@ -7,11 +7,11 @@ class Series < ActiveRecord::Base
   @tvdb ||= TvdbParty::Search.new("C62F24B5D73BAFE2", "en")
 
   def self.add(show)
-    @series_name = File.basename(show)
+    @series_name = show
     get_series_metadata
 
     puts "#{@series_metadata.name} in creation."
-    
+
     Series.where(:name => @series_metadata.name).first_or_create.tap do |serie|
       serie.name = @series_metadata.name
       serie.overview = @series_metadata.overview
