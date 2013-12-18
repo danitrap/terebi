@@ -2,10 +2,10 @@ require 'open-uri'
 
 class Calendar
   FEED = "http://services.tvrage.com/feeds/fullschedule.php?country=US"
-  @today = []
+  @@today = []
 
   def self.today
-    @today.empty? ? process_feeds : @today
+    @@today.empty? ? process_feeds : @@today
   end
 
   private
@@ -16,16 +16,16 @@ class Calendar
   end
 
   def self.get_feed
-    @today_us ||= Nokogiri::XML(open(FEED))
+    @@today_us ||= Nokogiri::XML(open(FEED))
   end
 
   def self.parse_feed
     Time.zone = 'Eastern Time (US & Canada)'
     date = Time.zone.now.strftime("%Y-%m-%d")
-    us_schedule = @today_us.css("schedule DAY[attr=\"#{date}\"] time")
+    us_schedule = @@today_us.css("schedule DAY[attr=\"#{date}\"] time")
 
-    @today << create_shows(us_schedule)
-    @today.flatten!
+    @@today << create_shows(us_schedule)
+    @@today.flatten!.compact!
   end
 
   def self.create_shows(schedule)

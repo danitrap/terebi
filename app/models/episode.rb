@@ -5,7 +5,7 @@ class Episode < ActiveRecord::Base
   validates :name, presence: true
   validates :path, presence: true, uniqueness: true
 
-  @tvdb ||= TvdbParty::Search.new("C62F24B5D73BAFE2", Settings.get(:subs_locale))
+  @tvdb ||= TvdbParty::Search.new("C62F24B5D73BAFE2", APP_CONFIG['subs_locale'])
 
   def meta
     season = "%02d" % self.season
@@ -40,6 +40,16 @@ class Episode < ActiveRecord::Base
         e.save!
       end
       p saved
+    end
+  end
+
+  def self.update_episodes
+    media_path = APP_CONFIG['media_path']
+    videos = Dir["#{media_path}/**/*.mkv"].to_a | Dir["#{media_path}/**/*.mp4"].to_a
+
+    videos.each do |episode|
+      name = File.basename(episode)
+      Episode.add(episode)
     end
   end
 end

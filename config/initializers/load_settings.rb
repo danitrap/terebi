@@ -1,5 +1,4 @@
-# loads the settings (config/settings.yml)
-Settings.load
+APP_CONFIG = YAML.load_file("#{Rails.root}/config/settings.yml")
 
 # preloads calendar data
 Thread.new {

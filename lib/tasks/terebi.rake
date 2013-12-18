@@ -1,7 +1,7 @@
 namespace :terebi do
   desc "update episodes"
   task update: :environment do
-    media_path = Settings.get(:media_path)
+    media_path = APP_CONFIG['media_path']
     videos = Dir["#{media_path}/**/*.mkv"].to_a | Dir["#{media_path}/**/*.mp4"].to_a
 
     videos.each do |episode|

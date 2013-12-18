@@ -12,6 +12,7 @@ gem 'suby'
 gem 'tvdb_party'
 gem 'nokogiri'
 gem 'thin'
+gem 'delayed_job_active_record'
 gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
                               :github => 'anjlab/bootstrap-rails'
 
