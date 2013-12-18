@@ -22,13 +22,13 @@ class Episode < ActiveRecord::Base
     episodio = Suby::FilenameParser.parse(file)
     p episodio
     results = @tvdb.search(episodio[:show]).first rescue nil
-    result = results && @tvdb.get_series_by_id(results["seriesid"]) rescue nil
-    tvdb_ep = result && result.get_episode(episodio[:season], episodio[:episode]) rescue nil
+    series_metadata = results && @tvdb.get_series_by_id(results["seriesid"]) rescue nil
+    tvdb_ep = series_metadata && series_metadata.get_episode(episodio[:season], episodio[:episode]) rescue nil
     if tvdb_ep.nil?
       tvdb_ep = TvdbMocker.new(episodio[:name], "No overview.", "http://placehold.it/350x250", Time.now)
     end
-    series_name = episodio[:show] || "Unknown"
-    series = Series.where("name LIKE ?", "%#{series_name}%").take || Series.add(series_name)
+    series_name = series_metadata.name || "Unknown"
+    series = Series.where(:name => series_name).take || Series.add(series_name)
     if series
       saved = series.episodes.where(:name => tvdb_ep.name).first_or_create.tap do |e|
         e.overview = tvdb_ep.overview
