@@ -78,6 +78,12 @@ class EpisodesController < ApplicationController
     end
   end
 
+  def force_update
+    Episode.delay.update_episodes
+    flash[:info] = "Forcing update. Refresh your browser in ~10 seconds."
+    redirect_to :root
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_episode

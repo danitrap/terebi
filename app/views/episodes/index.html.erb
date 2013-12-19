@@ -8,6 +8,10 @@
     <h2>Watched episodes</h2>
     <%= render partial: 'episode_item', collection: @seen_episodes, as: :episode %>
 <% end %>
-<br>
+<br><br>
 
 <%= link_to 'Add an episode manually', new_series_episode_path(@series, @show), class: "btn btn-info" %>
+
+<%= link_to 'Edit series', edit_series_path(@series), class: "btn btn-default" %>
+<%= link_to 'Destroy series', series_path(@series), method: :destroy, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+<br><br>

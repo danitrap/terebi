@@ -8,6 +8,8 @@ Terebi::Application.routes.draw do
     end
   end
 
+  get 'force_update', to: 'episodes#force_update'
+
   root "home#index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

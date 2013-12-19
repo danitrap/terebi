@@ -16,6 +16,6 @@
     <% if episode.seen == true %>
       <%= link_to 'Mark as unwatched', unsee_series_episode_path(episode.series, episode), class: "btn btn-default", method: :patch %>
     <% end %>
-    <%= link_to 'Destroy', series_episode_path(episode.series, episode), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+    <%= link_to 'Destroy episode', series_episode_path(episode.series, episode), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
   </div>
 </div>

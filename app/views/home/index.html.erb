@@ -8,7 +8,7 @@
         </div>
     </div>
     <div class="col-md-4">
-        <h3>Watched episodes <span class="badge"><%= @seen_count %></span></h3>
+        <h3>Latest watched episodes</h3>
         <div class="seen">
             <%= render partial: 'episode_table', object: @seen_episodes, as: :episodes %>
         </div>
@@ -18,6 +18,8 @@
         <%= render 'calendar' %>
     </div>
 </div>
+<%= link_to 'Force update', force_update_path, class: "btn btn-info" %>
+<br><br>
 <% else %>
 <h1>Welcome to terebi.</h1>
 <h3>Make sure to edit this file with your settings: <span class="label label-default">config/settings.yaml</span></h3>
