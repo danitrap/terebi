@@ -17,7 +17,7 @@ class EpisodesController < ApplicationController
   # PUT /episodes/1/play
   def play
     @episode.update_attribute(:seen, true)
-    Suby.download_subtitles [@episode.path], lang: (params[:lang] || APP_CONFIG['subs_locale'])
+    Suby.download_subtitles [@episode.path], lang: (params[:lang] || APP_CONFIG['subs_locale']), force: true
     system "bash", APP_CONFIG['player'], "\"#{@episode.path}\""
     redirect_to series_episodes_path(@series)
   end

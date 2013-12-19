@@ -1,1 +1,1 @@
-start /b rails s -p 1111
+start /b thin start -p 1111
