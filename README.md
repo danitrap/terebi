@@ -4,7 +4,19 @@ Terebi is a simple web based media center.
 
 ## Installation
 
-Clone this repository, edit the config file at `/config/settings.yml`. 
+Clone this repository, create and edit the config file at `/config/settings.yml`:
+
+    ---
+    # path to your media folder.
+    # please use slashes instead of backslashes even on windows.
+    # no trailing slashes!
+    media_path: F:/Tv Shows
+
+    # preferred locale for subtitles.
+    subs_locale: it
+
+    # the player you wish to use.
+    player: mpc.sh 
 
 Run `bundle install`
 

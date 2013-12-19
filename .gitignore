@@ -24,3 +24,4 @@ doc/
 .secret
 Thumbs.db
 .env
+config/settings.yml
