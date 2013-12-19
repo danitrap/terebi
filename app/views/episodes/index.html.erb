@@ -1,10 +1,13 @@
 <% provide(:title, @series.name) %>
 <%= image_tag @series.cached_banner, class: "img-responsive center-block" %><br>
+<% if @new_episodes.any? %>
 <h2>New episodes</h2>
-<%= render partial: 'episode_item', collection: @new_episodes, as: :episode %>
-<h2>Seen episodes</h2>
-<%= render partial: 'episode_item', collection: @seen_episodes, as: :episode %>
-
+    <%= render partial: 'episode_item', collection: @new_episodes, as: :episode %>
+    <% end %>
+<% if @seen_episodes.any? %>
+    <h2>Watched episodes</h2>
+    <%= render partial: 'episode_item', collection: @seen_episodes, as: :episode %>
+<% end %>
 <br>
 
-<%= link_to 'New Episode', new_series_episode_path(@series, @show), class: "btn btn-info" %>
+<%= link_to 'Add an episode manually', new_series_episode_path(@series, @show), class: "btn btn-info" %>
