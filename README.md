@@ -4,11 +4,13 @@ Terebi is a simple web based media center.
 
 ## Installation
 
-Fork this repository, edit the config file at `/config/settings.yml`. 
+Clone this repository, edit the config file at `/config/settings.yml`. 
 
-Run `rake db:migrate`.
+Run `bundle install`
 
-Run `rake terebi:update`.
+Run `rake db:migrate`
+
+Run `rake terebi:update`
 
 ## License
 
