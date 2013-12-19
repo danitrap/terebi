@@ -13,7 +13,6 @@
 /public/system
 
 # Ignore other unneeded files.
-database.yml
 doc/
 *.swp
 *~
