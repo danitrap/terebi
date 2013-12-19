@@ -59,7 +59,7 @@ class EpisodesController < ApplicationController
   def update
     respond_to do |format|
       if @episode.update(episode_params)
-        format.html { redirect_to series_episode_path(@series, @episode), notice: 'Episode was successfully updated.' }
+        format.html { redirect_to series_path(@series), notice: 'Episode was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -87,6 +87,6 @@ class EpisodesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def episode_params
-      params.require(:episode).permit(:name, :episode, :path, :overview, :thumb)
+      params.require(:episode).permit(:name, :episode, :path, :overview, :remote_thumb, :season, :air_date)
     end
 end

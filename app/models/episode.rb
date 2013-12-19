@@ -4,8 +4,6 @@ class Episode < ActiveRecord::Base
 
   has_attached_file :cached_thumb
 
-  attr_reader :remote_thumb
-
   validates :name, presence: true
   validates :path, presence: true, uniqueness: true
 
@@ -19,7 +17,11 @@ class Episode < ActiveRecord::Base
 
   def remote_thumb=(url)
     self.cached_thumb = URI.parse(url)
-    @remote_thumb = url
+    self.thumb = url
+  end
+
+  def remote_thumb
+    self.thumb
   end
 
   def self.add(video_path)

@@ -5,20 +5,26 @@ class Series < ActiveRecord::Base
   has_attached_file :cached_poster
   has_attached_file :cached_banner
 
-  attr_reader :remote_poster, :remote_banner
-
   validates :name, presence: true, uniqueness: true
 
   @tvdb ||= TvdbParty::Search.new("C62F24B5D73BAFE2", "en")
 
   def remote_poster=(url)
     self.cached_poster = URI.parse(url)
-    @remote_poster = url
+    self.poster = url
+  end
+
+  def remote_poster
+    self.poster
   end
 
   def remote_banner=(url)
     self.cached_banner = URI.parse(url)
-    @remote_banner = url
+    self.banner = url
+  end
+
+  def remote_banner
+    self.banner
   end
 
 
