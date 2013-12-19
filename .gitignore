@@ -9,6 +9,9 @@
 /log/*.log
 /tmp
 
+# Ignore paperclip cache
+/public/system
+
 # Ignore other unneeded files.
 database.yml
 doc/

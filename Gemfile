@@ -13,6 +13,7 @@ gem 'tvdb_party'
 gem 'nokogiri'
 gem 'thin'
 gem 'delayed_job_active_record'
+gem 'paperclip', '~> 3.0'
 gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
                               :github => 'anjlab/bootstrap-rails'
 

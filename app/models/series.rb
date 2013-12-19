@@ -2,9 +2,25 @@ require 'pathname'
 class Series < ActiveRecord::Base
   has_many :episodes, dependent: :destroy
 
+  has_attached_file :cached_poster
+  has_attached_file :cached_banner
+
+  attr_reader :remote_poster, :remote_banner
+
   validates :name, presence: true, uniqueness: true
 
   @tvdb ||= TvdbParty::Search.new("C62F24B5D73BAFE2", "en")
+
+  def remote_poster=(url)
+    self.cached_poster = URI.parse(url)
+    @remote_poster = url
+  end
+
+  def remote_banner=(url)
+    self.cached_banner = URI.parse(url)
+    @remote_banner = url
+  end
+
 
   def self.add(show)
     @series_name = show
@@ -15,8 +31,8 @@ class Series < ActiveRecord::Base
     Series.where(:name => @series_metadata.name).first_or_create.tap do |serie|
       serie.name = @series_metadata.name
       serie.overview = @series_metadata.overview
-      serie.banner = @series_metadata.series_banners('en').first.url
-      serie.poster = @series_metadata.posters('en').first.url
+      serie.remote_banner = @series_metadata.series_banners('en').first.url
+      serie.remote_poster = @series_metadata.posters('en').first.url
       serie.imdb_id = @series_metadata.imdb_id
       serie.save!
     end

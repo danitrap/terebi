@@ -1,6 +1,6 @@
 <div class="media <%= "seen" if episode.seen %>">
   <%= link_to(play_series_episode_path(episode.series, episode), class: "pull-left") do %>
-    <%= image_tag episode.thumb, class: "media-object episode-thumb", alt: episode.name %>
+    <%= image_tag episode.cached_thumb, class: "media-object episode-thumb", alt: episode.name %>
   <% end %>
   <div class="media-body">
     <h2 class="media-heading">

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131218224658) do
+ActiveRecord::Schema.define(version: 20131219150852) do
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
@@ -40,8 +40,12 @@ ActiveRecord::Schema.define(version: 20131218224658) do
     t.text     "thumb"
     t.date     "air_date"
     t.integer  "season"
-    t.boolean  "seen",              default: false
-    t.boolean  "subtitles_present", default: false
+    t.boolean  "seen",                      default: false
+    t.boolean  "subtitles_present",         default: false
+    t.string   "cached_thumb_file_name"
+    t.string   "cached_thumb_content_type"
+    t.integer  "cached_thumb_file_size"
+    t.datetime "cached_thumb_updated_at"
   end
 
   add_index "episodes", ["name", "season", "episode", "updated_at"], name: "index_episodes_on_name_and_season_and_episode_and_updated_at"
@@ -55,6 +59,14 @@ ActiveRecord::Schema.define(version: 20131218224658) do
     t.string   "imdb_id"
     t.string   "banner"
     t.text     "overview"
+    t.string   "cached_poster_file_name"
+    t.string   "cached_poster_content_type"
+    t.integer  "cached_poster_file_size"
+    t.datetime "cached_poster_updated_at"
+    t.string   "cached_banner_file_name"
+    t.string   "cached_banner_content_type"
+    t.integer  "cached_banner_file_size"
+    t.datetime "cached_banner_updated_at"
   end
 
   add_index "series", ["name", "updated_at"], name: "index_series_on_name_and_updated_at"

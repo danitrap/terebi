@@ -1,5 +1,5 @@
 <% provide(:title, @series.name) %>
-<%= image_tag @series.banner, class: "img-responsive center-block" %><br>
+<%= image_tag @series.cached_banner, class: "img-responsive center-block" %><br>
 <h2>New episodes</h2>
 <%= render partial: 'episode_item', collection: @new_episodes, as: :episode %>
 <h2>Seen episodes</h2>

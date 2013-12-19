@@ -4,7 +4,7 @@
       <div class="carousel-inner">
         <% @unseen_episodes.each_with_index do |c_episode, i| %>
             <div class="item <%= "active" if i == 0 %>">
-                <%= image_tag(c_episode.series.banner, alt: c_episode.name, class: "carousel-image") %>
+                <%= image_tag(c_episode.series.cached_banner, alt: c_episode.name, class: "carousel-image") %>
                 <div class="carousel-caption">
                     <h1><%= c_episode.name %></h1>
                     <p><%= c_episode.overview.truncate(100) %></p><br>
