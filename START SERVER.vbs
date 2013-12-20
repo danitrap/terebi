@@ -1,1 +1,0 @@
-CreateObject("Wscript.Shell").Run "terebi.bat", 0, False
