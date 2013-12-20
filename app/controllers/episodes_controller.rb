@@ -84,7 +84,6 @@ class EpisodesController < ApplicationController
 
   def force_update
     Episode.delay.update_episodes
-    SubtitlesChecker.delay.check!
     flash[:info] = "Forcing update. Refresh your browser in ~10 seconds."
     redirect_to :root
   end
