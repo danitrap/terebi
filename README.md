@@ -9,20 +9,22 @@ Clone this repository, create and edit the config file at `/config/settings.yml`
     ---
     # path to your media folder.
     # please use slashes instead of backslashes even on windows.
-    # no trailing slashes!
+    # and no trailing slashes!
     media_path: F:/Tv Shows
 
     # preferred locale for subtitles.
     subs_locale: it
 
     # the player you wish to use.
-    player: mpc.sh 
+    # remember to escape any backslashes.
+    player: C:\\Program Files (x86)\\K-Lite Codec Pack\\Media Player Classic\\mpc-hc.exe
 
-Run `bundle install`
+* Run `bundle install` to install dependencies.
+* Run `rake db:migrate` to create the database and add the schema.
+* Run `rake terebi:update` to update terebi's database.
+* Run the server `rails s`
 
-Run `rake db:migrate`
-
-Run `rake terebi:update`
+Enjoy!
 
 ## License
 
