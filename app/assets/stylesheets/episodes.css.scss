@@ -8,3 +8,15 @@
 .seen {
     opacity: 0.5;
 }
+
+.play {
+    background: asset-url('play_overlay.png') center center no-repeat;
+    background-size: 300px 168px;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    height: 225px;
+    margin: -225px 0 0 -200px;
+    z-index: 10;
+}
