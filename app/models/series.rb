@@ -52,4 +52,6 @@ class Series < ActiveRecord::Base
              "http://placehold.it/680x1000", "none")
     end
   end
+  private_class_method :get_series_metadata
+  
 end

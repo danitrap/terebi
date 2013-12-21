@@ -1,5 +1,5 @@
 class TvdbSeriesMocker < Struct.new(:name, :overview, :banner, :poster, :imdb_id)
-  def series_banner(lang)
+  def series_banners(lang)
     [Struct.new(:url).new(banner)]
   end
   def posters(lang)

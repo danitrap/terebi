@@ -28,7 +28,7 @@ class Episode < ActiveRecord::Base
     video_dir = Pathname.new(video_path.gsub("\\", "/"))
     video = video_dir.directory? ? video_dir.children.select {|v| File.extname(v) == ".mkv" || File.extname(v) == ".mp4"}.first : video_dir.to_s
     return nil if video.to_s.include?("sample")
-    return nil if Episode.exists? path: video.to_s
+    return Episode.where(:path => video).take if Episode.exists? path: video.to_s
     file = Path.new(video)
     episodio = Suby::FilenameParser.parse(file)
     results = @tvdb.search(episodio[:show]).first rescue nil
@@ -39,7 +39,7 @@ class Episode < ActiveRecord::Base
     end
     series_name = series_metadata.name || "Unknown"
     series = Series.where(:name => series_name).take || Series.add(series_name)
-    series.episodes.where(:name => tvdb_ep.name).first_or_create.tap do |e|
+    saved = series.episodes.where(:name => tvdb_ep.name).first_or_create.tap do |e|
       e.overview = tvdb_ep.overview
       e.remote_thumb = tvdb_ep.thumb
       e.air_date = tvdb_ep.air_date
@@ -49,6 +49,7 @@ class Episode < ActiveRecord::Base
       e.save!
     end
     puts "#{series_metadata.name} - #{tvdb_ep.name} added."
+    saved
   end
 
   def self.update_episodes
