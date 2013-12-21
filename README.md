@@ -2,29 +2,46 @@
 
 Terebi is a simple web based media center.
 
+It is born as a tool for me to manage all my TV Series.
+
+![Home page](http://i.imgur.com/c6zag4Y.jpg)
+
+![Series page](http://i.imgur.com/G1LVF1C.jpg)
+
 ## Installation
 
-Clone this repository, create and edit the config file at `/config/settings.yml`:
+Terebi is a Ruby app based on Rails, Thin, SQLite, and DelayedJob.
 
-    ---
-    # path to your media folder.
-    # please use slashes instead of backslashes even on windows.
-    # and no trailing slashes!
-    media_path: F:/Tv Shows
+It is meant to be ran locally as it auto-downloads subtitles and opens your media player of choice.
 
-    # preferred locale for subtitles.
-    subs_locale: it
-
-    # the player you wish to use.
-    # remember to escape any backslashes.
-    player: C:\\Program Files (x86)\\K-Lite Codec Pack\\Media Player Classic\\mpc-hc.exe
-
+* Clone this repository
 * Run `bundle install` to install dependencies.
 * Run `rake db:migrate` to create the database and add the schema.
-* Run `rake terebi:update` to update terebi's database.
+* Run `rake terebi:install` to configure and update terebi's database.
 * Run the server `rails s`
+* Enjoy!
 
-Enjoy!
+## Updating the app
+
+From the app's directory:
+
+    git pull
+    rake db:migrate
+    rails s
+
+## Development
+
+Run the Ruby tests with `rspec`.
+
+## Contribution
+
+Feel free to fork this repo and send me pull requests. I'll be happy to merge them!
+
+## Acknowledgements
+
+Most of the work is done by TvdbParty and Suby.
+
+The nice design is a courstesy of Twitter Bootstrap. 
 
 ## License
 
