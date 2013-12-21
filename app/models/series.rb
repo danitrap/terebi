@@ -7,7 +7,7 @@ class Series < ActiveRecord::Base
 
   validates :name, presence: true, uniqueness: true
 
-  @tvdb ||= TvdbParty::Search.new(APP_CONFIG["tvdb_key"], "en")
+  @tvdb ||= TvdbParty::Search.new("C62F24B5D73BAFE2", "en")
 
   def remote_poster=(url)
     self.cached_poster = URI.parse(url)

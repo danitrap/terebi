@@ -37,10 +37,6 @@ namespace :terebi do
     print "> "
     config["player"] = STDIN.gets.chomp
 
-    puts "Lastly, insert your TheTVDb API key.\nExample: C63F24D6D93BBFE3"
-    print "> "
-    config["tvdb_key"] = STDIN.gets.chomp
-
     File.open("./config/settings.yml", "w") do |f|
       f.write YAML::dump(config)
     end
