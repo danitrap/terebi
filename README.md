@@ -2,7 +2,7 @@
 
 Terebi is a simple web based media center.
 
-It is born as a tool for me to manage all my TV Series.
+It was born as a tool for me to manage all my TV Series.
 
 ![Home page](http://i.imgur.com/c6zag4Y.jpg)
 
@@ -12,7 +12,7 @@ It is born as a tool for me to manage all my TV Series.
 
 Terebi is a Ruby app based on Rails, Thin, SQLite, and DelayedJob.
 
-It is meant to be ran locally as it auto-downloads subtitles and opens your media player of choice.
+It is supposed to run locally as it auto-downloads subtitles and opens your media player of choice.
 
 * Clone this repository
 * Run `bundle install` to install dependencies.
@@ -41,7 +41,7 @@ Feel free to fork this repo and send me pull requests. I'll be happy to merge th
 
 Most of the work is done by TvdbParty and Suby.
 
-The nice design is a courstesy of Twitter Bootstrap. 
+The nice design is a courtesy of Twitter Bootstrap. 
 
 ## License
 
