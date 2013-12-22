@@ -32,7 +32,7 @@ class Series < ActiveRecord::Base
     @series_name = show
     get_series_metadata
 
-    puts "#{@series_metadata.name} in creation."
+    logger.info "#{@series_metadata.name} in creation."
 
     Series.where(:name => @series_metadata.name).first_or_create.tap do |serie|
       serie.name = @series_metadata.name

@@ -48,7 +48,7 @@ class Episode < ActiveRecord::Base
       e.path = video.to_s
       e.save!
     end
-    puts "#{series_metadata.name} - #{tvdb_ep.name} added."
+    logger.info "#{series_metadata.name} - #{tvdb_ep.name} added."
     saved
   end
 
