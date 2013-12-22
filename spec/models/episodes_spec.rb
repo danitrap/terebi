@@ -15,5 +15,9 @@ describe Episode do
     episode.meta.should eq "S05E16"
   end
 
+  it "should not add an episode sample" do
+    sample = "Series 1x1 - Name.sample.mkv"
+    Episode.add(Rails.root.join('tmp', sample).to_s).should be_nil
+  end
 
 end
