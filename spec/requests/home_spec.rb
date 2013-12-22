@@ -13,7 +13,7 @@ describe "Home" do
 
   describe "normal GET /" do
     before(:each) do
-      Episode.add(Rails.root.join('tmp', 'Breaking.Bad.S05E16.720p.HDTV.x264-IMMERSE.mkv').to_s)
+      Episode.add(Rails.root.join('tmp', 'Breaking Bad 5x16 - Felina.mp4').to_s)
       visit root_url
     end
   

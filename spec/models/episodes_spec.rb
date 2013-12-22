@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Episode do
-  let(:episode) { Episode.add(Rails.root.join('tmp', 'Breaking.Bad.S05E16.720p.HDTV.x264-IMMERSE.mkv').to_s) }
+  let(:episode) { Episode.add(Rails.root.join('tmp', 'Breaking Bad 5x16 - Felina.mp4').to_s) }
 
   it "should add an episode named Felina" do
     episode.name.should eq "Felina"
