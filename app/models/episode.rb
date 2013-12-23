@@ -1,5 +1,8 @@
-require 'pathname'
 class Episode < ActiveRecord::Base
+
+  scope :seen, -> { where(:seen => true).order("updated_at DESC").limit(10) }
+  scope :unseen, -> { where(:seen => false).order("air_date DESC") }
+
   belongs_to :series, touch: true
 
   has_attached_file :cached_thumb
