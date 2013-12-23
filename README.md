@@ -4,11 +4,11 @@ Terebi is a simple web based media center.
 
 It was born as a tool for me to manage all my TV Series.
 
-![Home page](http://i.imgur.com/78TZpNN.png)
+![Home page](https://raw.github.com/danitrap/terebi/master/screenshots/home_page.png)
 
-![Series page](http://i.imgur.com/NCtT1GD.jpg)
+![Series page](https://raw.github.com/danitrap/terebi/master/screenshots/series_page.png)
 
-![Episode list page](http://i.imgur.com/OvWcczB.jpg)
+![Episode list page](https://github.com/danitrap/terebi/raw/master/screenshots/episode_list_page.png)
 
 ## Installation
 
