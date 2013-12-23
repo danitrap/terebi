@@ -4,9 +4,11 @@ Terebi is a simple web based media center.
 
 It was born as a tool for me to manage all my TV Series.
 
-![Home page](http://i.imgur.com/c6zag4Y.jpg)
+![Home page](http://i.imgur.com/78TZpNN.png)
 
-![Series page](http://i.imgur.com/G1LVF1C.jpg)
+![Series page](http://i.imgur.com/NCtT1GD.jpg)
+
+![Episode list page](http://i.imgur.com/OvWcczB.jpg)
 
 ## Installation
 
@@ -35,7 +37,7 @@ Run the Ruby tests with `rspec`.
 
 ## Contribution
 
-Feel free to fork this repo and send me pull requests. I'll be happy to merge them!
+Feel free to fork this repo, create a branch with your new features, and send me pull requests. I'll be happy to merge them!
 
 ## Acknowledgements
 
