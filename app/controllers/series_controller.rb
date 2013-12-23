@@ -64,7 +64,7 @@ class SeriesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_series
-      @series = Series.find(params[:id])
+      @series = Series.find(params[:id].to_i)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

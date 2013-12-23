@@ -15,7 +15,7 @@ describe "Series" do
 
     it "should go to the series episode listing" do
       page.first("div.thumbnail a").click
-      current_url.should eq series_episodes_url(1)
+      current_url.should eq series_episodes_url("1-breaking-bad")
     end
 
   end

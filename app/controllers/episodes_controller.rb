@@ -4,7 +4,7 @@ class EpisodesController < ApplicationController
   # GET /episodes
   # GET /episodes.json
   def index
-    @series = Series.find(params[:series_id])
+    @series = Series.find(params[:series_id].to_i)
     @new_episodes = @series.episodes.where(:seen => false).order("season desc, episode desc")
     @seen_episodes = @series.episodes.where(:seen => true).order("season desc, episode desc")
   end
@@ -33,7 +33,7 @@ class EpisodesController < ApplicationController
 
   # GET /episodes/new
   def new
-    @series = Series.find(params[:series_id])
+    @series = Series.find(params[:series_id].to_i)
     @episode = @series.episodes.new
   end
 
@@ -44,7 +44,7 @@ class EpisodesController < ApplicationController
   # POST /episodes
   # POST /episodes.json
   def create
-    @series = Series.find(params[:series_id])
+    @series = Series.find(params[:series_id].to_i)
     @episode = @series.episodes.new(episode_params)
 
     respond_to do |format|
@@ -91,8 +91,8 @@ class EpisodesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_episode
-      @series = Series.find(params[:series_id])
-      @episode = @series.episodes.find(params[:id])
+      @series = Series.find(params[:series_id].to_i)
+      @episode = @series.episodes.find(params[:id].to_i)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

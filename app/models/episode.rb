@@ -12,6 +12,10 @@ class Episode < ActiveRecord::Base
 
   @tvdb ||= TvdbParty::Search.new("C62F24B5D73BAFE2", "en")
 
+  def to_param
+    "#{id} #{name}".parameterize
+  end
+
   def meta
     season = "%02d" % self.season
     ep = "%02d" % self.episode

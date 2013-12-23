@@ -9,6 +9,10 @@ class Series < ActiveRecord::Base
 
   @tvdb ||= TvdbParty::Search.new("C62F24B5D73BAFE2", "en")
 
+  def to_param
+    "#{id} #{name}".parameterize
+  end
+
   def remote_poster=(url)
     self.cached_poster = URI.parse(url)
     self.poster = url
