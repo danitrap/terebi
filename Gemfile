@@ -14,7 +14,8 @@ gem 'nokogiri', '~> 1.6.1'
 gem 'thin', '~> 1.6.1'
 gem 'delayed_job_active_record', '~> 4.0.0'
 gem 'paperclip', '~> 3.0'
-gem 'anjlab-bootstrap-rails', '~> 3.0.3.0', :require => 'bootstrap-rails'
+gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
+                          :github => 'anjlab/bootstrap-rails'
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.14.0'
