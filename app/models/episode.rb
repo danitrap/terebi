@@ -44,7 +44,7 @@ class Episode < ActiveRecord::Base
     tvdb_ep = series_metadata && series_metadata.get_episode(episodio[:season], episodio[:episode]) rescue nil
     
     if tvdb_ep.nil?
-      tvdb_ep = TvdbMocker.new(episodio[:name], "No overview.", "http://placehold.it/350x250", Time.now)
+      tvdb_ep = TvdbMocker.new(episodio[:name] || "Untitled", "No overview.", "http://placehold.it/350x250", Time.now)
     end
 
     series_name = series_metadata.name || "Unknown"
