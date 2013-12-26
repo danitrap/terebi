@@ -19,7 +19,7 @@ class EpisodesController < ApplicationController
     @episode.update_attribute(:seen, true)
     Thread.new {
       Suby.download_subtitles [@episode.path], lang: (params[:lang] || APP_CONFIG['subs_locale']), force: true
-      system APP_CONFIG['player'], "\"#{@episode.path}\""
+      system APP_CONFIG['player'], "#{@episode.path}"
       ActiveRecord::Base.connection.close
     }
     flash[:success] = "Downloading subtitles and playing #{@episode.series.name} - #{@episode.name}"
