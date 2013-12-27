@@ -47,7 +47,11 @@ class Episode < ActiveRecord::Base
       tvdb_ep = TvdbMocker.new(episodio[:name] || "Untitled", "No overview.", "http://placehold.it/350x250", Time.now)
     end
 
-    series_name = series_metadata.name || "Unknown"
+    if series_metadata
+      series_name = series_metadata.name
+    else
+      series_name = "Unknown Series"
+    end
     
     series = Series.where(:name => series_name).take || Series.add(series_name)
     saved = series.episodes.where(:name => tvdb_ep.name).first_or_create.tap do |e|
@@ -59,7 +63,7 @@ class Episode < ActiveRecord::Base
       e.path = video
       e.save!
     end
-    logger.info "#{series_metadata.name} - #{tvdb_ep.name} added."
+    logger.info "#{saved.series.name} - #{tvdb_ep.name} added."
     saved
   end
 

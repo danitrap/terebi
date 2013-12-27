@@ -52,7 +52,7 @@ class Series < ActiveRecord::Base
     results = @tvdb.search(@series_name).first rescue nil
     @series_metadata = @tvdb.get_series_by_id(results["seriesid"]) rescue nil
     if @series_metadata.nil? 
-      @series_metadata = TvdbSeriesMocker.new("Unknown", "Unknown series.", "http://placehold.it/350x50",
+      @series_metadata = TvdbSeriesMocker.new("Unknown Series", "Unknown series.", "http://placehold.it/350x50",
              "http://placehold.it/680x1000", "none")
     end
   end
