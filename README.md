@@ -20,7 +20,7 @@ It is supposed to run locally as it auto-downloads subtitles and opens your medi
 * Run `bundle install` to install dependencies.
 * Run `rake db:migrate` to create the database and add the schema.
 * Run `rake terebi:install` to configure and update terebi's database.
-* Run the server `rails s`
+* Run the server `foreman start`
 * Enjoy!
 
 ## Updating the app
@@ -29,7 +29,7 @@ From the app's directory:
 
     git pull
     rake db:migrate
-    rails s
+    foreman start
 
 ## Development
 
