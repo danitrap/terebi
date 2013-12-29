@@ -39,6 +39,10 @@
     <%= f.label :air_date %><br>
     <%= f.date_field :air_date, class: "form-control" %>
   </div>
+  <div class="field">
+    <%= f.label :series_id, as: "Series" %><br>
+    <%= collection_select(:episode, :series_id, Series.all, :id, :name, {prompt: true}) %>
+  </div>
   <div class="actions">
     <%= f.submit class: "btn btn-primary" %>
   </div>
