@@ -32,7 +32,7 @@ class Calendar
 
   def self.create_shows(schedule)
   schedule.css('show').map do |s|
-      Show.new(s.attr('name'), s.css('title').text, s.parent.attr('attr')) if Series.exists? name: s.attr('name')
+      Show.new(s.attr('name'), s.css('title').text, s.parent.attr('attr')) if Series.exists?(['name LIKE ?', "%#{s.attr('name')}%"])
     end
   end
 
