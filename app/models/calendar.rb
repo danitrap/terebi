@@ -19,7 +19,7 @@ class Calendar
   end
 
   def self.parse_feed
-    date = Time.zone.now.strftime("%Y-%m-%d")
+    date = Time.zone.now.strftime("%Y-%-m-%-d")
     us_schedule = @us.css("schedule DAY[attr=\"#{date}\"] time")
 
     @today_expires_on = Time.zone.now.midnight + 1.day
