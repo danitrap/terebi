@@ -16,20 +16,16 @@ class EpisodesController < ApplicationController
 
   # PUT /episodes/1/play
   def play
-    if request.remote_ip == "127.0.0.1"
-      @episode.update_attribute(:seen, true)
-      Thread.new {
-        quietly {
-          Suby.download_subtitles [@episode.path], lang: (params[:lang] || APP_CONFIG['subs_locale']), force: true
-          system APP_CONFIG['player'], "#{@episode.path}"
-        }
-        ActiveRecord::Base.connection.close
+    @episode.update_attribute(:seen, true)
+    Thread.new {
+      quietly {
+        Suby.download_subtitles [@episode.path], lang: (params[:lang] || APP_CONFIG['subs_locale']), force: true
+        system APP_CONFIG['player'], "#{@episode.path}"
       }
-      flash[:success] = "Downloading subtitles and playing #{@episode.series.name} - #{@episode.name}"
-      redirect_to series_episodes_path(@series)
-    else
-      send_file @episode.path
-    end
+      ActiveRecord::Base.connection.close
+    }
+    flash[:success] = "Downloading subtitles and playing #{@episode.series.name} - #{@episode.name}"
+    redirect_to series_episodes_path(@series)
   end
 
   def unsee
