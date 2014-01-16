@@ -7,7 +7,7 @@
                 <%= image_tag(c_episode.series.cached_banner, alt: c_episode.name, class: "carousel-image") %>
                 <div class="carousel-caption">
                     <h1><%= c_episode.name %></h1>
-                    <p><%= c_episode.overview.truncate(100) %></p><br>
+                    <p><%= c_episode.overview && c_episode.overview.truncate(100) %></p><br>
                     <%= link_to "Watch", play_series_episode_path(c_episode.series, c_episode), class: "btn btn-success btn-lg" %>
                 </div>
             </div>
