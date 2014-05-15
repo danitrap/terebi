@@ -19,7 +19,7 @@ class EpisodesController < ApplicationController
     @episode.update_attribute(:seen, true)
     Thread.new {
       quietly {
-        Suby.download_subtitles [@episode.path], lang: (params[:lang] || APP_CONFIG['subs_locale']), force: true
+        system "subliminal -l #{params[:lang] || APP_CONFIG['subs_locale']} -s -f -- #{"\"" + @episode.path.gsub('/', '\\') + "\""}"
         system APP_CONFIG['player'], "#{@episode.path}"
       }
       ActiveRecord::Base.connection.close
