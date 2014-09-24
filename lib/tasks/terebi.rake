@@ -28,7 +28,7 @@ namespace :terebi do
     config["media_path"] = STDIN.gets.chomp.gsub("\\", "/").chomp("/")
 
     puts "Next up, tell me which language you'd like your subtitles in.\n" +
-         "Example: en"
+         "Example: eng"
     print "> "
     config["subs_locale"] = STDIN.gets.chomp
 
@@ -46,4 +46,4 @@ namespace :terebi do
 
   end
 
-end  
+end

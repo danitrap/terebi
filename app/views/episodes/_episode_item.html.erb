@@ -10,8 +10,8 @@
     <%= content_tag :span, time_ago_in_words(episode.air_date) + " ago", title: episode.air_date %>
     <p><%= episode.overview %></p>
     <%= link_to "Play (#{APP_CONFIG['subs_locale']})", play_series_episode_path(episode.series, episode), class: "btn btn-primary" %>
-    <% if APP_CONFIG['subs_locale'] != "en" %>
-      <%= link_to "Play (en)", play_series_episode_path(episode.series, episode, lang: "en"), class: "btn btn-default" %>
+    <% if APP_CONFIG['subs_locale'] != "eng" %>
+      <%= link_to "Play (eng)", play_series_episode_path(episode.series, episode, lang: "eng"), class: "btn btn-default" %>
     <% end %>
     <%= link_to 'Edit', edit_series_episode_path(episode.series, episode), class: "btn btn-default" %>
     <% if episode.seen == true %>
