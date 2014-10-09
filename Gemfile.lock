@@ -33,6 +33,7 @@ GEM
       multi_json (~> 1.3)
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
+    angularjs-rails (1.2.25)
     arel (4.0.1)
     atomic (1.1.14)
     builder (3.1.4)
@@ -61,6 +62,7 @@ GEM
       delayed_job (>= 3.0, < 4.1)
     diff-lcs (1.2.5)
     erubis (2.7.0)
+    eventmachine (1.0.3)
     eventmachine (1.0.3-x86-mingw32)
     execjs (2.0.2)
     hike (1.2.3)
@@ -83,6 +85,8 @@ GEM
     minitest (4.7.5)
     multi_json (1.8.2)
     multi_xml (0.5.5)
+    nokogiri (1.6.1)
+      mini_portile (~> 0.5.0)
     nokogiri (1.6.1-x86-mingw32)
       mini_portile (~> 0.5.0)
     osdb (0.1.3)
@@ -136,6 +140,7 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
+    sqlite3 (1.3.8)
     sqlite3 (1.3.8-x86-mingw32)
     suby (0.4.2)
       mime-types (>= 1.19)
@@ -172,6 +177,7 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
+  angularjs-rails
   anjlab-bootstrap-rails!
   capybara (~> 2.2.0)
   coffee-rails (~> 4.0.0)

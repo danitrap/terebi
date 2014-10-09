@@ -17,6 +17,7 @@ gem 'delayed_job_active_record', '~> 4.0.0'
 gem 'paperclip', '~> 3.0'
 gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
                           :github => 'anjlab/bootstrap-rails'
+gem 'angularjs-rails'
 
 group :development, :test do
   gem 'rspec-rails', '~> 2.14.0'
