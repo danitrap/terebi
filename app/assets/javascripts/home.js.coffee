@@ -13,3 +13,7 @@ app.controller 'HomeCtrl', ['$scope', '$http', ($scope, $http) ->
   $http.get('/series.json').success (data) ->
     $scope.series = data
 ]
+
+app.filter 'formatWiki', ->
+  return (input) ->
+    return input.replace(/\(.*?\)/g, '').trim().replace(/\s/g, '_')

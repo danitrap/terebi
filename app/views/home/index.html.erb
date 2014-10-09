@@ -32,7 +32,7 @@
           <p><em>{{ serie.overview | characters:100 }}</em></p>
           <p>
             <a href="http://www.imdb.com/title/{{ serie.imdb_id }}", target="_blank" class="btn btn-default">IMDb</a>
-            <a href="http://en.wikipedia.org/wiki/List_of_{{ serie.name }}" target="_blank" class="btn btn-default">Episode list</a>
+            <a href="http://en.wikipedia.org/wiki/List_of_{{ serie.name | formatWiki }}_episodes" target="_blank" class="btn btn-default">Episode list</a>
           </p>
         </div>
       </div>
