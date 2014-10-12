@@ -4,7 +4,7 @@
 $('.carousel').carousel()
 
 $(document).on 'ready page:load', ->
-  angular.bootstrap document, ['app']
+  angular.bootstrap document.body, ['app']
 
 class HomeCtrl
   constructor: (SeriesService) ->
