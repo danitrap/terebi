@@ -14,7 +14,7 @@ class HomeCtrl
 SeriesService = ($http) ->
   return {
     list: ->
-      return $http.get('/series.json').then (response) -> response.data
+      return promise = $http.get('/series.json').then (response) -> response.data
   }
 
 formatWiki = ->
