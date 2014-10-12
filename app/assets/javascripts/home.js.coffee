@@ -3,17 +3,26 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $('.carousel').carousel()
 
-app = angular.module 'app', ['truncate']
-
 $(document).on 'ready page:load', ->
-  angular.bootstrap document, ['app']
+    angular.bootstrap document, ['app']
+
+HomeCtrl = ($scope, SeriesService) ->
+    SeriesService.list().then (series) ->
+        $scope.series = series
+
+SeriesService = ($http) ->
+    {
+        list: ->
+            return $http.get('/series.json').then (response) -> response.data
+    }
 
 
-app.controller 'HomeCtrl', ['$scope', '$http', ($scope, $http) ->
-  $http.get('/series.json').success (data) ->
-    $scope.series = data
-]
 
-app.filter 'formatWiki', ->
-  return (input) ->
-    return input.replace(/\(.*?\)/g, '').trim().replace(/\s/g, '_')
+formatWiki = ->
+    return (input) ->
+        return input.replace(/\(.*?\)/g, '').trim().replace(/\s/g, '_')
+
+angular.module('app', ['truncate']).
+    factory('SeriesService', ['$http', SeriesService]).
+    controller('HomeCtrl', ['$scope', 'SeriesService', HomeCtrl]).
+    filter('formatWiki', formatWiki)
