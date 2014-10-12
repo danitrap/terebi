@@ -12,7 +12,7 @@ class HomeCtrl
             @series = series
 
 SeriesService = ($http) ->
-    {
+    return {
         list: ->
             return $http.get('/series.json').then (response) -> response.data
     }
@@ -22,6 +22,6 @@ formatWiki = ->
         return input.replace(/\(.*?\)/g, '').trim().replace(/\s/g, '_')
 
 angular.module('app', ['truncate']).
-    factory('SeriesService', ['$http', SeriesService]).
     controller('HomeCtrl', ['SeriesService', HomeCtrl]).
-    filter('formatWiki', formatWiki)
+    filter('formatWiki', formatWiki).
+    factory('SeriesService', ['$http', SeriesService])
