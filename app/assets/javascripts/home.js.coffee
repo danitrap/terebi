@@ -6,9 +6,10 @@ $('.carousel').carousel()
 $(document).on 'ready page:load', ->
     angular.bootstrap document, ['app']
 
-HomeCtrl = ($scope, SeriesService) ->
-    SeriesService.list().then (series) ->
-        $scope.series = series
+class HomeCtrl
+    constructor: (SeriesService) ->
+        SeriesService.list().then (series) =>
+            @series = series
 
 SeriesService = ($http) ->
     {
@@ -16,13 +17,11 @@ SeriesService = ($http) ->
             return $http.get('/series.json').then (response) -> response.data
     }
 
-
-
 formatWiki = ->
     return (input) ->
         return input.replace(/\(.*?\)/g, '').trim().replace(/\s/g, '_')
 
 angular.module('app', ['truncate']).
     factory('SeriesService', ['$http', SeriesService]).
-    controller('HomeCtrl', ['$scope', 'SeriesService', HomeCtrl]).
+    controller('HomeCtrl', ['SeriesService', HomeCtrl]).
     filter('formatWiki', formatWiki)

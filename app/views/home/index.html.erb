@@ -21,10 +21,10 @@
 <%= link_to 'Force update', force_update_path, class: "btn btn-info" %>
 <br><br>
 
-<div class="series" ng-controller="HomeCtrl">
+<div class="series" ng-controller="HomeCtrl as home">
     <input type="text" class="form-control" placeholder="Search" ng-model="search">
     <br>
-    <div class="col-sm-6 col-md-3" ng-repeat="serie in series | filter:search">
+    <div class="col-sm-6 col-md-3" ng-repeat="serie in home.series | filter:search">
       <div class="thumbnail">
         <a href="{{ serie.url }}"><img ng-src="{{ serie.cached_poster }}"></a>
         <div class="caption">
