@@ -4,7 +4,10 @@ class SeriesController < ApplicationController
   # GET /series
   # GET /series.json
   def index
-    @series = Series.order("name")
+    respond_to do |format|
+      format.html { redirect_to :root }
+      format.json { @series = Series.order("name") }
+    end
   end
 
   # GET /series/new
