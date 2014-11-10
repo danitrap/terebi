@@ -44,7 +44,7 @@ class Episode < ActiveRecord::Base
     tvdb_ep = series_metadata && series_metadata.get_episode(episodio[:season], episodio[:episode]) rescue nil
     
     if tvdb_ep.nil?
-      tvdb_ep = TvdbMocker.new(episodio[:name] || "Untitled", "No overview.", "http://placehold.it/350x250", Time.now)
+      tvdb_ep = TvdbMocker.new(episodio[:name] || "Untitled", "No overview.", "http://placehold.it/400x225", Time.now)
     end
 
     if series_metadata
@@ -56,7 +56,7 @@ class Episode < ActiveRecord::Base
     series = Series.where(:name => series_name).take || Series.add(series_name)
     saved = series.episodes.where(:name => tvdb_ep.name).first_or_create.tap do |e|
       e.overview = tvdb_ep.overview
-      e.remote_thumb = tvdb_ep.thumb
+      e.remote_thumb = tvdb_ep.thumb || "http://placehold.it/400x225"
       e.air_date = tvdb_ep.air_date
       e.episode = episodio[:episode] || 0
       e.season = episodio[:season] || 0
